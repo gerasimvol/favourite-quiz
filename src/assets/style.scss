@@ -1,0 +1,37 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #c0c0c0;
+}
+
+button {
+  cursor: pointer;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.flex {
+  &-center {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  padding: 10px;
+}
+
+h4 {
+  margin: 10px 0 !important;
+}
+
+h5 {
+  font-size: 14px !important;
+  margin: 10px 0 !important;
+}
