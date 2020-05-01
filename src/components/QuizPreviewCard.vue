@@ -2,6 +2,9 @@
   <div class="quiz-preview-card window">
     <div class="title-bar">
       <div class="title-bar-text">{{ name }}</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" @click="deleteQuiz"></button>
+      </div>
     </div>
     <div class="window-body">
       <div class="quiz-preview-card__images">
@@ -36,6 +39,14 @@ export default {
     items: {
       type: Array,
       required: true
+    }
+  },
+
+  methods: {
+    deleteQuiz () {
+      if (prompt('Delete password:') === 'wwe') {
+        this.$store.dispatch('deleteQuiz', this.id)
+      }
     }
   }
 }

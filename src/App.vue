@@ -8,17 +8,20 @@
       <div v-else key="loading" class="loading">
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'App',
 
   components: {
-    Header
+    Header,
+    Footer
   },
 
   created () {
@@ -30,7 +33,22 @@ export default {
 <style lang="scss">
   @import "./assets/style.scss";
 
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .footer {
+    margin-top: auto;
+  }
+
   .loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     &::after {
       content: 'Loading...';
       animation: loading 0.7s infinite;

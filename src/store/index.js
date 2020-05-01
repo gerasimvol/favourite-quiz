@@ -31,6 +31,11 @@ export default new Vuex.Store({
         quiz: quizData
       })
       dispatch('fetchQuizes')
+    },
+    async deleteQuiz ({ dispatch, commit }, quizId) {
+      commit('SET_LOADING', true)
+      await api.delete(`/${quizId}`)
+      dispatch('fetchQuizes')
     }
   },
 
