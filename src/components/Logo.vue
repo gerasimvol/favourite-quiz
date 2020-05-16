@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/" class="logo">
+  <div class="logo" @click="goHome">
     <svg viewBox="0 0 512 512">
       <path fill="#ffda44" d="M512 0H300.522v33.391h-66.783v33.392h-66.782v33.391h-33.392v33.391h-33.391v33.393H66.783v66.782H33.391v66.784H0V512h144.696V311.652h33.393l-.002-66.782h33.762v-33.392l33.022.001-.001-33.392h66.782v-33.391H512z"/>
       <path fill="#57a4ff" d="M512 222.609H322.783l.001 33.391h-33.39l-.003 33.391h-33.39L256 322.783h-33.391V512h133.565V389.565h33.391v-33.391H512v-33.391z"/>
@@ -8,12 +8,20 @@
       <path d="M322.783 478.609h-66.782V322.783H222.61v155.826h-77.914V311.652h-33.392v166.957H33.391V300.522H0V512h356.174V389.565h-33.391zM133.565 100.174h33.391v33.391h-33.391zM100.174 133.565h33.391v33.391h-33.391zM233.739 33.391h66.783v33.391h-66.783zM166.957 66.783h66.783v33.391h-66.783zM66.783 166.957h33.391v66.783H66.783zM33.391 233.739h33.391v66.783H33.391z"/>
       <path d="M478.609 0H300.523v33.391h178.086v77.913H311.653v33.392h-66.782v33.391h66.782v-33.391h166.956v77.913H322.784V256h155.825v66.783h-89.044v33.391H512V0z"/>
     </svg>
-  </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Logo'
+  name: 'Logo',
+
+  methods: {
+    goHome () {
+      if (this.$route.name === 'Home' || !confirm('Go to homepage?')) return
+
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
@@ -22,6 +30,7 @@ export default {
     display: block;
     width: 30px;
     height: 30px;
+    cursor: pointer;
 
     svg {
       width: 100%;

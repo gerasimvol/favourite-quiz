@@ -39,7 +39,7 @@
         </div>
       </template>
       <template v-else>
-        <h2>For you <em>{{ quiz.quiz.name }}</em> is</h2>
+        <h2><em>{{ quiz.quiz.name }}</em> winner is</h2>
         <div class="winner__img">
           <img :src="winner.img" />
           <h4>{{ winner.name }}</h4>
@@ -52,28 +52,6 @@
 <script>
 import cloneDeep from 'lodash/cloneDeep'
 import random from 'lodash/random'
-
-// 4
-// step 1 = 4 / 2 = 2
-// step 2 = 2 / 2 = 1
-
-// 8
-// step 1 = 8 / 2 = 4
-// step 2 = 4 / 2 = 2
-// step 3 = 2 / 2 = 1
-
-// 16
-// step 1 = 16 / 2 = 8
-// step 2 = 8 / 2 = 4
-// step 3 = 4 / 2 = 2
-// step 4 = 2 / 2 = 1
-
-// 32
-// step 1 = 32 / 2 = 16
-// step 2 = 16 / 2 = 8
-// step 3 = 8 / 2 = 4
-// step 4 = 4 / 2 = 2
-// step 5 = 2 / 2 = 1
 
 export default {
   name: 'QuizPage',

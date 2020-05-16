@@ -3,7 +3,9 @@
     <div class="title-bar">
       <div class="title-bar-text">{{ name }}</div>
       <div class="title-bar-controls">
-        <button aria-label="Close" @click="deleteQuiz"></button>
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize" @click="$router.push(`/quiz/${id}`)"></button>
+        <button aria-label="Close"></button>
       </div>
     </div>
     <div class="window-body">
@@ -39,14 +41,6 @@ export default {
     items: {
       type: Array,
       required: true
-    }
-  },
-
-  methods: {
-    deleteQuiz () {
-      if (prompt('Delete password:') === 'wwe') {
-        this.$store.dispatch('deleteQuiz', this.id)
-      }
     }
   }
 }
