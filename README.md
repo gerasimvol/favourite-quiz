@@ -2,5 +2,5 @@
 
 [Live](http://favourite-quiz.surge.sh)
 
-#### 3 hours hackathon challenge
-##### App that allows you to create quizes "Ideal World Cup"
+#### 3 hours coding challenge
+##### App that allows you to create quizes in "Ideal World Cup" style
