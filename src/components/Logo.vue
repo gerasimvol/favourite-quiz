@@ -1,5 +1,5 @@
 <template>
-  <div class="logo" @click="goHome">
+  <div class="logo">
     <svg viewBox="0 0 512 512">
       <path fill="#ffda44" d="M512 0H300.522v33.391h-66.783v33.392h-66.782v33.391h-33.392v33.391h-33.391v33.393H66.783v66.782H33.391v66.784H0V512h144.696V311.652h33.393l-.002-66.782h33.762v-33.392l33.022.001-.001-33.392h66.782v-33.391H512z"/>
       <path fill="#57a4ff" d="M512 222.609H322.783l.001 33.391h-33.39l-.003 33.391h-33.39L256 322.783h-33.391V512h133.565V389.565h33.391v-33.391H512v-33.391z"/>
@@ -13,15 +13,7 @@
 
 <script>
 export default {
-  name: 'Logo',
-
-  methods: {
-    goHome () {
-      if (this.$route.name === 'Home' || !confirm('Go to homepage?')) return
-
-      this.$router.push('/')
-    }
-  }
+  name: 'Logo'
 }
 </script>
 

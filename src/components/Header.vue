@@ -1,7 +1,7 @@
 <template>
   <header class="header title-bar">
-    <Logo />
-    <button @click="$router.push('/create-quiz')">+  Create new quiz</button>
+    <Logo @click.native="navigateTo('/')" />
+    <button @click="navigateTo('/create-quiz')">+  Create new quiz</button>
   </header>
 </template>
 
@@ -13,6 +13,14 @@ export default {
 
   components: {
     Logo
+  },
+
+  methods: {
+    navigateTo (route) {
+      if (this.$route.name === 'Home' || !confirm('Leave this page?')) return
+
+      this.$router.push(route)
+    }
   }
 }
 </script>
