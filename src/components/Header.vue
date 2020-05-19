@@ -17,9 +17,15 @@ export default {
 
   methods: {
     navigateTo (route) {
-      if (this.$route.name === 'Home' || !confirm('Leave this page?')) return
-
-      this.$router.push(route)
+      // allow from homepage
+      if (this.$route.name === 'Home') {
+        this.$router.push(route)
+      } else {
+        // ask before leave from other pages
+        if (confirm('Leave this page?')) {
+          this.$router.push(route)
+        }
+      }
     }
   }
 }
