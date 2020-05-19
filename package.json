@@ -6,7 +6,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "npm run build && surge dist"
+    "deploy": "npm run build && surge --domain favourite-quiz.surge.sh ./dist"
   },
   "dependencies": {
     "axios": "^0.19.2",
