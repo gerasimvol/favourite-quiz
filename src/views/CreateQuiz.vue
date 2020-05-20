@@ -14,6 +14,9 @@
         <option :value="8">8</option>
         <option :value="16">16</option>
         <option :value="32">32</option>
+        <option :value="64">64</option>
+        <option :value="128">128</option>
+        <option :value="256">256</option>
       </select>
     </fieldset>
 
@@ -73,7 +76,12 @@ export default {
 
   computed: {
     isQuizValid () {
-      return this.submitText !== 'Loading...' && this.name && this.images.every(image => image.name && image.url)
+      return this.submitText !== 'Loading...' &&
+        this.name &&
+        this.images.every(image =>
+          image.name &&
+          this.isImgUrlValid(image.url)
+        )
     }
   },
 
@@ -89,6 +97,10 @@ export default {
   },
 
   methods: {
+    isImgUrlValid (url) {
+      return url &&
+          /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/.test(url)
+    },
     addImages (amount) {
       for (let i = 0; i < amount; i++) {
         this.images = [...this.images, {
@@ -162,14 +174,15 @@ export default {
     }
 
     .img-wrapper {
-      border: 1px dotted #808080;
       width: 150px;
       height: 150px;
+      border: 1px dotted #808080;
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        object-position: center;
       }
     }
   }
