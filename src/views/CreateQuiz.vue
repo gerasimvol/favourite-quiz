@@ -110,6 +110,8 @@ export default {
       }
     },
     async submitQuiz () {
+      if (!this.isQuizValid) return
+
       this.submitText = 'Loading...'
       await this.$store.dispatch('addQuiz', {
         name: this.name,
