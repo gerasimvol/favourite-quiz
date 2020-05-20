@@ -1,4 +1,5 @@
 <template>
+<div class="logo-wrapper">
   <div class="logo">
     <svg viewBox="0 0 512 512">
       <path fill="#ffda44" d="M512 0H300.522v33.391h-66.783v33.392h-66.782v33.391h-33.392v33.391h-33.391v33.393H66.783v66.782H33.391v66.784H0V512h144.696V311.652h33.393l-.002-66.782h33.762v-33.392l33.022.001-.001-33.392h66.782v-33.391H512z"/>
@@ -9,6 +10,8 @@
       <path d="M478.609 0H300.523v33.391h178.086v77.913H311.653v33.392h-66.782v33.391h66.782v-33.391h166.956v77.913H322.784V256h155.825v66.783h-89.044v33.391H512V0z"/>
     </svg>
   </div>
+  <h5 class="logo__text">Homepage</h5>
+</div>
 </template>
 
 <script>
@@ -22,10 +25,21 @@ export default {
     display: block;
     width: 30px;
     height: 30px;
-    cursor: pointer;
+    flex-shrink: 0;
 
     svg {
       width: 100%;
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &__text {
+      color: white;
+      padding-left: 10px;
     }
   }
 </style>

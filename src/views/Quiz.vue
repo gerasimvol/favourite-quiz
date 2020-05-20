@@ -10,9 +10,18 @@
         </div>
         <div class="window-body">
           <p>Do you want to start <strong>{{ quiz.quiz.name }}</strong> quiz?</p>
+          <section class="field-row preview__images">
+            <div
+              v-for="(previewImg, i) in quiz.quiz.items.filter((item, i) => i < 2)"
+              :key="i"
+              class="preview__image"
+            >
+              <img :src="previewImg.img" />
+            </div>
+          </section>
           <section class="field-row">
             <button @click="start">Start</button>
-            <button @click="$router.push('/')">Back</button>
+            <button @click="$router.push('/')">Back to homepage</button>
           </section>
         </div>
       </div>
@@ -130,8 +139,12 @@ export default {
     margin: 0 auto;
 
     .window {
-      width: 300px;
+      width: 400px;
       margin: 100px auto 0 auto;
+
+      @include mobile {
+        width: 90%;
+      }
 
       .field-row {
         justify-content: center;
@@ -177,6 +190,16 @@ export default {
           transform: scale(1.02);
         }
       }
+    }
+  }
+
+  .preview {
+    &__images {
+      display: flex;
+    }
+
+    &__image {
+      flex: 1;
     }
   }
 </style>
