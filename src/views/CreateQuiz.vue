@@ -5,6 +5,7 @@
     <fieldset>
       <legend>Quiz name</legend>
         <input class="name-input" type="text" v-model="name" />
+        <span v-show="errors.nameInvalid" class="name-input__error">Invalid value</span>
     </fieldset>
 
     <fieldset>
@@ -36,12 +37,14 @@
           <div class="field-row images-row__name">
             <label :for="`alt-${i}`">Label</label>
             <input v-model="image.name" :id="`alt-${i}`" type="text" />
+            <span v-show="errors.imagesList[i] && errors.imagesList[i].name" class="images-row__error">Invalid value</span>
           </div>
         </div>
         <div>
           <div class="field-row images-row__img">
             <label :for="`img-${i}`">Img URL</label>
             <input v-model="image.url" :id="`img-${i}`" type="text" />
+            <span v-show="errors.imagesList[i] && errors.imagesList[i].img" class="images-row__error">Invalid value</span>
           </div>
         </div>
         <div>
@@ -53,10 +56,7 @@
     </fieldset>
 
     <div class="submit">
-      <button
-        :disabled="!isQuizValid"
-        @click="submitQuiz"
-      >
+      <button @click="submitQuiz">
         {{ submitText }}
       </button>
     </div>
@@ -69,21 +69,14 @@ export default {
 
   data: () => ({
     submitText: 'Submit quiz',
-    itemsAmount: 16,
+    itemsAmount: 4,
     name: '',
-    images: []
-  }),
-
-  computed: {
-    isQuizValid () {
-      return this.submitText !== 'Loading...' &&
-        this.name &&
-        this.images.every(image =>
-          image.name &&
-          this.isImgUrlValid(image.url)
-        )
+    images: [],
+    errors: {
+      nameInvalid: false,
+      imagesList: []
     }
-  },
+  }),
 
   watch: {
     itemsAmount (itemsAmount) {
@@ -97,9 +90,22 @@ export default {
   },
 
   methods: {
+    isQuizValid () {
+      this.errors.nameInvalid = !this.name
+      this.errors.imagesList = []
+      this.images.forEach((image, i) => {
+        this.errors.imagesList[i] = { name: !image.name, img: !this.isImgUrlValid(image.url) }
+      })
+
+      return this.submitText !== 'Creating...' &&
+        this.name &&
+        this.images.every((image, i) => {
+          return image.name && this.isImgUrlValid(image.url)
+        })
+    },
     isImgUrlValid (url) {
       return url &&
-          /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/.test(url)
+          /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|svg))/.test(url)
     },
     addImages (amount) {
       for (let i = 0; i < amount; i++) {
@@ -110,9 +116,9 @@ export default {
       }
     },
     async submitQuiz () {
-      if (!this.isQuizValid) return
+      if (!this.isQuizValid()) return
 
-      this.submitText = 'Loading...'
+      this.submitText = 'Creating...'
       await this.$store.dispatch('addQuiz', {
         name: this.name,
         items: this.images.map(image => ({ name: image.name, img: image.url }))
@@ -170,9 +176,26 @@ export default {
     }
 
     &__img {
+      position: relative;
+
       input {
         min-width: 250px;
       }
+    }
+
+    &__name {
+      position: relative;
+    }
+
+    &__error {
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      color: red;
+      font-family: "Pixelated MS Sans Serif",Arial;
+      font-size: 10px;
+      font-weight: 100;
+      margin: 0;
     }
 
     .img-wrapper {
@@ -191,6 +214,14 @@ export default {
 
   .name-input {
     min-width: 250px;
+
+    &__error {
+      color: red;
+      font-family: "Pixelated MS Sans Serif",Arial;
+      font-size: 10px;
+      font-weight: 100;
+      margin-left: 10px;
+    }
   }
 
   .submit {
